@@ -11,6 +11,6 @@
 
 -- 3 Query to get all posts fields, user's first and last name
 -- from the posts table where user_id is 200
-SELECT *
-  FROM posts INNER JOIN users ON (posts.users_id = users.users_id)
+SELECT posts.*, users.first_name, users.last_name
+  FROM posts INNER JOIN users ON (posts.users_id = users.id)
   WHERE users_id = 200;
