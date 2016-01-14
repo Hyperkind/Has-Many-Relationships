@@ -17,8 +17,13 @@
 
 -- 4 Create a query to get all posts fields and user's username
 -- from the posts table where first name is 'Norene', last name 'Schmitt'
-SELECT posts.*, users.username
-  FROM posts INNER JOIN users ON (posts.users_id = users.id)
-  WHERE users.first_name = 'Norene' AND users.last_name = 'Schmitt';
+-- SELECT posts.*, users.username
+--   FROM posts INNER JOIN users ON (posts.users_id = users.id)
+--   WHERE users.first_name = 'Norene' AND users.last_name = 'Schmitt';
 
+-- 5 Query to get usernames from users table where user has created a post
+-- after 1/1/2015
+SELECT username
+  FROM users
+  WHERE created_at >= '2015-01-01 00:00:00';
 
