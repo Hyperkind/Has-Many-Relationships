@@ -23,7 +23,13 @@
 
 -- 5 Query to get usernames from users table where user has created a post
 -- after 1/1/2015
-SELECT username
-  FROM users
-  WHERE created_at >= '2015-01-01 00:00:00';
+-- SELECT username
+--   FROM users
+--   WHERE created_at >= '2015-01-01 00:00:00';
+
+-- 6 Query to get the post title, post content, user's username where
+-- the user who created the post joined before 1/1/2015
+SELECT posts.title, posts.content, users.username
+  FROM posts INNER JOIN users ON (posts.users_id = users.id)
+  WHERE users.created_at < '2015-01-01 00:00:00';
 
