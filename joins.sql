@@ -25,11 +25,21 @@
 -- after 1/1/2015
 -- SELECT username
 --   FROM users
---   WHERE created_at >= '2015-01-01 00:00:00';
+--   WHERE created_at > '2015-01-01 00:00:00';
 
 -- 6 Query to get the post title, post content, user's username where
 -- the user who created the post joined before 1/1/2015
-SELECT posts.title, posts.content, users.username
-  FROM posts INNER JOIN users ON (posts.users_id = users.id)
-  WHERE users.created_at < '2015-01-01 00:00:00';
+-- SELECT posts.title, posts.content, users.username
+--   FROM posts INNER JOIN users ON (posts.users_id = users.id)
+--   WHERE users.created_at < '2015-01-01 00:00:00';
 
+-- 7 Query to get all rows in the comments table, showing post title
+-- (aliased as 'Post Title') and all the comment's fields
+SELECT comments.*, posts.title AS "Post Title"
+  FROM comments INNER JOIN posts ON (comments.posts_id = posts.id)
+
+
+-- 8 Query to get all rows in the comments table, showing post title
+-- (aliased as post_title), post url (aliased as post_url), and all
+-- the comment's fields
+-- SELECT comments.*, posts
