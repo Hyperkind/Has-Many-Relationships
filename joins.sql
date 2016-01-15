@@ -74,8 +74,20 @@
 -- 12 Query to get the first name of the author of the comment, last name of the
 -- author of the comment, and comment body (alias comment_body), where the comment
 -- body contains the word 'SSL' and the post content contains the word 'dolorum'
-SELECT first_name, last_name, comments.body AS "comment_body"
+-- SELECT first_name, last_name, comments.body AS "comment_body"
+--   FROM users
+--     INNER JOIN comments ON (users.id = comments.users_id)
+--     INNER JOIN posts ON (users.id = posts.users_id)
+--   WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%dolorum%';
+
+-- 13 Query to get the first name of the author of the post (alias post_author_first_name),
+-- last name of the author (alias to post_author_last_name), post title (alias to post_title),
+-- username of the author of the comment (alias to comment_author_username) and comment body
+-- (alias to comment_body) where the comment body contains the word 'SSL' or 'firewall'
+-- and the post content contains the word 'nemo'
+SELECT first_name AS "post_author_first_name", last_name AS "post_author_last_name", posts.title AS "post_title", username AS "comment_author_username", comments.body AS "comment_body"
   FROM users
-    INNER JOIN comments ON (users.id = comments.users_id)
     INNER JOIN posts ON (users.id = posts.users_id)
-  WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%dolorum%';
+    INNER JOIN comments ON (users.id = comments.users_id)
+  WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%nemo%'
+    OR comments.body LIKE '%firewall%' AND posts.content LIKE '%nemo%';
