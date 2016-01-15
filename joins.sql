@@ -57,6 +57,25 @@
 -- 10 Query to get all the rows in the comments table, showing post title
 -- (alias post_title), post url (alias post_url), comment body (alias comment_body)
 -- where the comment body contains the word 'USB'
-SELECT comments.*, posts.title AS "post_title", posts.url AS "post_url", comments.body AS "comment_body"
-  FROM comments INNER JOIN posts ON (comments.posts_id = posts.id)
-  WHERE body LIKE '%USB%';
+-- SELECT comments.*, posts.title AS "post_title", posts.url AS "post_url", comments.body AS "comment_body"
+--   FROM comments INNER JOIN posts ON (comments.posts_id = posts.id)
+--   WHERE body LIKE '%USB%';
+
+-- 11 Query to get the post title (alias post_title), first name of the author
+-- of the post, last name of the author of the post and comment body
+-- (alias comment_body) where the comment body contains the word 'matrix'
+-- should have 855 results
+-- SELECT title, users.first_name, users.last_name, comments.body AS "comment_body"
+--   FROM posts
+--     INNER JOIN users ON posts.users_id = users.id
+--     INNER JOIN comments ON users.id = comments.users_id
+--   WHERE comments.body LIKE '%matrix%';
+
+-- 12 Query to get the first name of the author of the comment, last name of the
+-- author of the comment, and comment body (alias comment_body), where the comment
+-- body contains the word 'SSL' and the post content contains the word 'dolorum'
+SELECT first_name, last_name, comments.body AS "comment_body"
+  FROM users
+    INNER JOIN comments ON (users.id = comments.users_id)
+    INNER JOIN posts ON (users.id = posts.users_id)
+  WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%dolorum%';
