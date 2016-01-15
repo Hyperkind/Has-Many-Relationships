@@ -65,19 +65,24 @@
 -- of the post, last name of the author of the post and comment body
 -- (alias comment_body) where the comment body contains the word 'matrix'
 -- should have 855 results
--- SELECT title, users.first_name, users.last_name, comments.body AS "comment_body"
---   FROM posts
---     INNER JOIN users ON posts.users_id = users.id
---     INNER JOIN comments ON users.id = comments.users_id
+-- SELECT posts.title AS "post_title",
+--   users.first_name,
+--   users.last_name,
+--   body AS "comment_body"
+--   FROM comments
+--     INNER JOIN posts ON (comments.posts_id = posts.id)
+--     INNER JOIN users ON (comments.users_id = users.id)
 --   WHERE comments.body LIKE '%matrix%';
 
 -- 12 Query to get the first name of the author of the comment, last name of the
 -- author of the comment, and comment body (alias comment_body), where the comment
 -- body contains the word 'SSL' and the post content contains the word 'dolorum'
--- SELECT first_name, last_name, comments.body AS "comment_body"
---   FROM users
---     INNER JOIN comments ON (users.id = comments.users_id)
---     INNER JOIN posts ON (users.id = posts.users_id)
+-- SELECT users.first_name,
+--   users.last_name,
+--   body AS "comment_body"
+--   FROM comments
+--     INNER JOIN users ON (comments.users_id = users.id)
+--     INNER JOIN posts ON (comments.posts_id = posts.id)
 --   WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%dolorum%';
 
 -- 13 Query to get the first name of the author of the post (alias post_author_first_name),
@@ -85,12 +90,16 @@
 -- username of the author of the comment (alias to comment_author_username) and comment body
 -- (alias to comment_body) where the comment body contains the word 'SSL' or 'firewall'
 -- and the post content contains the word 'nemo'
--- SELECT first_name AS "post_author_first_name", last_name AS "post_author_last_name", posts.title AS "post_title", username AS "comment_author_username", comments.body AS "comment_body"
---   FROM users
---     INNER JOIN posts ON (users.id = posts.users_id)
---     INNER JOIN comments ON (users.id = comments.users_id)
---   WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%nemo%'
---     OR comments.body LIKE '%firewall%' AND posts.content LIKE '%nemo%';
+SELECT users.first_name AS "post_author_first_name",
+  users.last_name AS "post_author_last_name",
+  title AS "post_title",
+  users.username AS "comment_author_username",
+  comments.body AS "comment_body"
+  FROM posts
+    INNER JOIN comments ON (posts.id = comments.posts_id)
+    INNER JOIN users ON (posts.users_id = users.id)
+  WHERE (comments.body LIKE '%firewall%' AND posts.content LIKE '%nemo%')
+    OR (comments.body LIKE '%SSL%' AND posts.content LIKE '%nemo%');
 
 -- ADDITIONAL!
 

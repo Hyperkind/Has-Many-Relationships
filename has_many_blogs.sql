@@ -1,3 +1,5 @@
+\c has_many_blogs;
+
 -- Drops the users table
 DROP TABLE IF EXISTS users;
 
